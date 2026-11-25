@@ -36,7 +36,7 @@ GitHub Actions builds this app when Android source or build files change. The wo
 
 The upstream Android client has its own Gradle and native CMake build. To check it, open the Actions tab and run **Upstream Android build**. That workflow checks out chiaki-ng at a pinned commit, initializes its submodules and attempts to assemble its Android APK.
 
-The pinned upstream Android source now builds successfully in GitHub Actions and its APK is uploaded as the `chiaki-ng-android-reference` artifact. This confirms the CI build path, not physical-device streaming. Install and validate that APK using [docs/device-test-plan.md](docs/device-test-plan.md). The source review and integration sequence are in [docs/chiaki-review.md](docs/chiaki-review.md) and [docs/integration-roadmap.md](docs/integration-roadmap.md).
+The pinned upstream Android source now builds successfully in [Actions run 45535017493](https://github.com/spideythedev/BeyondConsole/actions/runs/45535017493); its APK is uploaded as the `chiaki-ng-android-reference` artifact. This confirms the CI build path, not physical-device streaming. Install and validate that APK using [docs/device-test-plan.md](docs/device-test-plan.md). The source review and integration sequence are in [docs/chiaki-review.md](docs/chiaki-review.md) and [docs/integration-roadmap.md](docs/integration-roadmap.md).
 
 ## Remote Play implementation
 
