@@ -30,7 +30,7 @@ gradle :app:assembleDebug
 
 Gradle writes the APK to `app/build/outputs/apk/debug/app-debug.apk`.
 
-GitHub Actions builds this app when Android source or build files change. The workflow uploads the debug APK as an artifact.
+GitHub Actions builds this app when Android source or build files change. The workflow uploads the debug APK as an artifact. The latest successful shell build is [run 45534271331](https://github.com/spideythedev/BeyondConsole/actions/runs/45534271331), with the `beyondconsole-android-debug` artifact.
 
 ## Build the Remote Play reference
 
