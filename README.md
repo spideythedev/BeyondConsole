@@ -14,6 +14,17 @@ The Android app uses a dark, controller-inspired interface with a remote-play he
 
 The desktop app has not been started.
 
+## Documentation
+
+- [User guide](docs/USER-GUIDE.md)
+- [Frequently asked questions](docs/FAQ.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Dependencies and build tools](docs/DEPENDENCIES.md)
+- [Contributing](CONTRIBUTING.md)
+- [Security](SECURITY.md)
+- [Support](SUPPORT.md)
+- [License](LICENSE) — Apache License 2.0
+
 ## Repository
 
 - `app/` contains the Android project, adaptive launcher icon and splash branding.
@@ -34,7 +45,7 @@ gradle :app:assembleDebug
 
 Gradle writes the APK to `app/build/outputs/apk/debug/app-debug.apk`.
 
-GitHub Actions builds this app when Android source or build files change. The workflow uploads the debug APK as an artifact. The Android workflow builds the debug APK and uploads it as `beyondconsole-android-debug`. The latest successful profile-and-branding build is [run 45565454822](https://github.com/spideythedev/BeyondConsole/actions/runs/45565454822).
+GitHub Actions builds this app when Android source or build files change. The workflow uploads the debug APK as an artifact. The Android workflow builds the debug APK and uploads it as `beyondconsole-android-debug`. Check the [Actions tab](https://github.com/spideythedev/BeyondConsole/actions) for the latest result.
 
 ## Build the Remote Play reference
 
@@ -47,6 +58,10 @@ The pinned upstream Android source now builds successfully in [Actions run 45535
 We are reviewing [chiaki-ng](https://github.com/chiaki-ng/chiaki-ng) before writing any of the Remote Play protocol ourselves. Its repository already has an Android client, native streaming code and desktop support.
 
 chiaki-ng is licensed under AGPL-3.0 with an additional permission for linking with OpenSSL. Any code taken from it must keep the original notices and follow the license. We will settle the integration and distribution details before shipping a build based on that code.
+
+## License and copyright
+
+BeyondConsole is licensed under the [Apache License, Version 2.0](LICENSE). Copyright © 2026 Fahad Malik and BeyondConsole contributors. See [NOTICE](NOTICE) for project attribution and trademark information.
 
 ## Scope
 
