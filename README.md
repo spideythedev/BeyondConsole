@@ -10,7 +10,7 @@ The PS5 or PS4 runs the game. BeyondConsole handles the remote session: video, a
 
 ## Current state
 
-The Android app is an early shell. It can save multiple named console profiles (name and local IP address), select one, and remove saved entries. Profiles stay on the device. The app also shows the phone's current network transport. It does not discover consoles, verify that a saved address belongs to a PlayStation, register with PSN or stream gameplay yet. Android 8+ adaptive launcher icons and the Android 12+ system splash screen use the BeyondConsole brand mark.
+The Android app can save multiple named console profiles (name and local IP address), select one, and remove saved entries. Profiles stay on the device. It shows the current network transport and can scan the connected Wi-Fi subnet for hosts accepting TCP connections on port 9295, the PlayStation Remote Play control port. A port match is only a candidate; it does not identify or verify a PlayStation. Console registration, session negotiation, video, audio and controller streaming are not implemented yet. Android 8+ adaptive launcher icons and the Android 12+ system splash screen use the BeyondConsole brand mark.
 
 The desktop app has not been started.
 
@@ -34,7 +34,7 @@ gradle :app:assembleDebug
 
 Gradle writes the APK to `app/build/outputs/apk/debug/app-debug.apk`.
 
-GitHub Actions builds this app when Android source or build files change. The workflow uploads the debug APK as an artifact. The Android workflow builds the debug APK and uploads it as `beyondconsole-android-debug`. The latest profile-and-branding changes are being built by GitHub Actions; check the Actions tab for the current result.
+GitHub Actions builds this app when Android source or build files change. The workflow uploads the debug APK as an artifact. The Android workflow builds the debug APK and uploads it as `beyondconsole-android-debug`. The latest successful profile-and-branding build is [run 45565454822](https://github.com/spideythedev/BeyondConsole/actions/runs/45565454822).
 
 ## Build the Remote Play reference
 
