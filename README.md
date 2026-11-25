@@ -53,3 +53,13 @@ chiaki-ng is licensed under AGPL-3.0 with an additional permission for linking w
 BeyondConsole is an independent project. It is not affiliated with or endorsed by Sony Interactive Entertainment. PlayStation, PS4 and PS5 are trademarks of their respective owners.
 
 BeyondConsole will not distribute game files, bypass console security or connect to consoles without the owner's authorization.
+
+## Brand assets
+
+The project logo lives in `assets/brand/`:
+
+- `logo.svg` — primary symbol mark.
+- `icon.svg` — standalone app/icon mark.
+- `wordmark.svg` — horizontal BeyondConsole wordmark.
+
+The SVG files are resolution-independent and can be used in the app, website and project materials.
