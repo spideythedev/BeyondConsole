@@ -64,10 +64,24 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/consoleAddress"
+                android:id="@+id/consoleName"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/input_background"
+                android:hint="@string/console_name_hint"
+                android:inputType="textCapSentences"
+                android:paddingHorizontal="14dp"
+                android:singleLine="true"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_muted" />
+
+            <EditText
+                android:id="@+id/consoleAddress"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="12dp"
                 android:autofillHints=""
                 android:background="@drawable/input_background"
                 android:hint="@string/console_address_hint"
@@ -76,6 +90,15 @@
                 android:singleLine="true"
                 android:textColor="@color/text_primary"
                 android:textColorHint="@color/text_muted" />
+
+            <TextView
+                android:id="@+id/consoleProfileStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="@string/console_profile_empty"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
 
             <Button
                 android:id="@+id/saveConsoleButton"
