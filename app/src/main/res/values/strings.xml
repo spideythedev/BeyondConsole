@@ -27,6 +27,16 @@ Your screen.</string>
     <string name="network_ethernet">Connected over Ethernet</string>
     <string name="network_cellular">Connected over mobile data</string>
     <string name="network_connected">Connected to a network</string>
+    <string name="scan_consoles">Scan local network</string>
+    <string name="scan_intro">Scan your Wi-Fi network for devices responding on the PlayStation Remote Play control port.</string>
+    <string name="scan_wifi_required">Connect to the same Wi-Fi network as your console before scanning.</string>
+    <string name="scan_network_unavailable">Could not read the current Wi-Fi network address.</string>
+    <string name="scan_running">Checking up to %1$d local addresses…</string>
+    <string name="scan_running_progress">Scanning local network…</string>
+    <string name="scan_no_hosts">No other local addresses to check.</string>
+    <string name="scan_none_found">No devices responded on TCP port 9295. You can still add a console address manually.</string>
+    <string name="scan_candidate_found">Potential Remote Play device:\\n%1$s</string>
+    <string name="scan_candidates_found">Potential Remote Play devices:\\n%1$s\\n\\nThese are port matches, not verified PlayStation consoles. Add the address to a profile to try it manually.</string>
     <string name="invalid_ip">Enter a valid IP address.</string>
     <string name="console_saved">Console address saved on this device.</string>
     <string name="development_note">Early development build. Remote Play registration, video, audio and controller input are not implemented yet.</string>
