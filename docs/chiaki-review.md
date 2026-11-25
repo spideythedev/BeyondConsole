@@ -1,30 +1,47 @@
 # Remote Play implementation review
 
-Reviewed against the chiaki-ng repository on 25 November 2026.
+Reviewed against chiaki-ng commit `43728af2e639fecb8a7af1cd68c29820a40de973` on 25 November 2026.
 
 Repository: https://github.com/chiaki-ng/chiaki-ng
 
-## What is already there
+## Android application
 
-The project has a complete Android application, not just a protocol library. Its Android target includes:
+The upstream Android target contains a full client application.
 
-- Kotlin activities and view models for console discovery, registration, settings and streaming.
-- A C JNI layer around chiaki-lib.
-- Android MediaCodec-based video decoding.
-- Native audio output using Oboe.
-- Touch controls and controller input handling.
-- A Gradle Android application module that builds the native library with CMake.
+The Kotlin side includes:
 
-The Android app currently uses the package `com.metallic.chiaki`, Kotlin/JVM 17, compile SDK 35, NDK 28.2 and CMake 3.22.1. Its native build config disables the desktop GUI and CLI and enables the Android target.
+- Console discovery through `DiscoveryManager`.
+- Manual console profiles and registered-console storage.
+- Registration flow and registration-key handling.
+- Session lifecycle in `StreamSession`.
+- Video surface management.
+- Controller input from touch controls, Android key events, gamepads and motion sensors.
+- Settings, logging and connection state.
+
+The native side is in `android/app/src/main/cpp`. JNI connects the Kotlin session classes to `chiaki-lib`. The native layer handles Remote Play session creation, video decode through Android MediaCodec, audio decode and output, controller state and discovery.
+
+The Android app uses package `com.metallic.chiaki`, compile SDK 35, min SDK 24, NDK `28.2.13676358`, CMake `3.22.1`, JDK 17 and Gradle wrapper 8.11.1. Its Android module builds the root CMake project with the desktop GUI and CLI disabled.
+
+## Build dependencies
+
+The upstream repository uses Git submodules. The Android build needs at least the nanopb, gf-complete, jerasure and curl sources. A checkout for a build must initialize submodules recursively.
+
+The Android build also downloads native dependencies through CMake/Gradle. CI can fail because an upstream package registry rate-limits requests; that failure should be distinguished from compiler or source errors.
+
+A manual GitHub Actions workflow in this repository checks out the upstream source at the commit listed above, initializes its submodules and attempts to assemble its debug APK. This keeps the reference build separate from the BeyondConsole app shell.
+
+## Desktop client
+
+The upstream repository also contains a Qt desktop application. The root CMake project builds the core library and optional GUI separately from the Android target. Desktop reuse needs its own build and packaging review.
 
 ## License
 
-The upstream repository declares AGPL-3.0. Its source files and notices must remain intact when reused. A distributed modified or combined work needs to comply with the applicable AGPL terms, including the corresponding source-code obligations. Review the exact distribution model before publishing builds.
+The upstream repository includes AGPL-3.0-only with additional OpenSSL permissions in `LICENSES/AGPL-3.0-only-OpenSSL.txt`. Keep upstream source notices and license files intact. Before distributing a modified or combined application, review the full license and satisfy its corresponding source and notice requirements.
 
-## Decision
+## Current decision
 
-Do not reimplement Remote Play registration, transport, decoding or controller protocols until the existing implementation has been evaluated in a real Android build.
+Do not copy selected Kotlin or JNI files into the BeyondConsole app yet. They depend on the upstream database, preferences, model classes, resource IDs, native library, CMake options, third-party submodules and application lifecycle.
 
-The immediate next engineering task is to create a reproducible build of the upstream Android client, then test whether its native core and Android session layer can be maintained as a fork or integrated behind a BeyondConsole-specific app shell.
+First build and run the upstream Android app unchanged. Then decide whether to maintain a clearly attributed fork or to integrate the native core and the required Kotlin layers behind a BeyondConsole interface.
 
-The new BeyondConsole Android module is currently only a small project shell. It saves a console IP profile and reports Android network connectivity. It does not discover consoles, register a PSN account, establish a Remote Play session or stream media.
+The current BeyondConsole Android app is a separate shell. It saves a console IP address locally and displays Android network status. It does not discover consoles, register accounts, connect to a Remote Play session or stream media.
