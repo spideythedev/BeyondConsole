@@ -53,11 +53,9 @@ class MainActivity : Activity() {
         val details = findViewById<TextView>(R.id.networkDetails)
         val manager = getSystemService(ConnectivityManager::class.java)
         val network = manager.activeNetwork
-        val capabilities = manager.getNetworkCapabilities(network)
+        val capabilities = network?.let(manager::getNetworkCapabilities)
 
-        if (capabilities == null ||
-            !capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-        ) {
+        if (capabilities == null) {
             status.setText(R.string.network_offline)
             details.setText(R.string.network_offline_details)
             return
