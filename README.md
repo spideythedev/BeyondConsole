@@ -16,7 +16,7 @@ The desktop app has not been started.
 - `docs/architecture.md` records the implementation plan.
 - `docs/chiaki-review.md` covers the Remote Play code we are evaluating.
 
-## Build Android
+## Build the Android shell
 
 The project uses JDK 17, Gradle 8.9 and Android SDK 35.
 
@@ -28,13 +28,19 @@ gradle :app:assembleDebug
 
 Gradle writes the APK to `app/build/outputs/apk/debug/app-debug.apk`.
 
-The Android build also runs on GitHub Actions for pushes and pull requests to `main`.
+GitHub Actions builds this app when Android source or build files change. The workflow uploads the debug APK as an artifact.
+
+## Build the Remote Play reference
+
+The upstream Android client has its own Gradle and native CMake build. To check it, open the Actions tab and run **Upstream Android build**. That workflow checks out chiaki-ng at a pinned commit, initializes its submodules and attempts to assemble its Android APK.
+
+The source review and build details are in [docs/chiaki-review.md](docs/chiaki-review.md).
 
 ## Remote Play implementation
 
 We are reviewing [chiaki-ng](https://github.com/chiaki-ng/chiaki-ng) before writing any of the Remote Play protocol ourselves. Its repository already has an Android client, native streaming code and desktop support.
 
-chiaki-ng is licensed under AGPL-3.0. Any code taken from it must keep the original notices and follow the license. We will settle the integration and distribution details before shipping a build based on that code.
+chiaki-ng is licensed under AGPL-3.0 with an additional permission for linking with OpenSSL. Any code taken from it must keep the original notices and follow the license. We will settle the integration and distribution details before shipping a build based on that code.
 
 ## Scope
 
