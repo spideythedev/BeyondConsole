@@ -16,6 +16,7 @@ The desktop app has not been started.
 - `docs/architecture.md` records the implementation plan.
 - `docs/chiaki-review.md` covers the Remote Play code we are evaluating.
 - `docs/device-test-plan.md` defines the physical-device validation required before calling streaming ready.
+- `docs/integration-roadmap.md` records the upstream integration findings and release gates.
 
 ## Build the Android shell
 
@@ -35,7 +36,7 @@ GitHub Actions builds this app when Android source or build files change. The wo
 
 The upstream Android client has its own Gradle and native CMake build. To check it, open the Actions tab and run **Upstream Android build**. That workflow checks out chiaki-ng at a pinned commit, initializes its submodules and attempts to assemble its Android APK.
 
-The source review and build details are in [docs/chiaki-review.md](docs/chiaki-review.md).
+The pinned upstream Android source now builds successfully in GitHub Actions and its APK is uploaded as the `chiaki-ng-android-reference` artifact. This confirms the CI build path, not physical-device streaming. Install and validate that APK using [docs/device-test-plan.md](docs/device-test-plan.md). The source review and integration sequence are in [docs/chiaki-review.md](docs/chiaki-review.md) and [docs/integration-roadmap.md](docs/integration-roadmap.md).
 
 ## Remote Play implementation
 
