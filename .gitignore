@@ -1,0 +1,44 @@
+# Build output
+build/
+out/
+dist/
+cmake-build-*/
+.gradle/
+.idea/
+.vscode/
+
+# Android / Gradle
+**/.gradle/
+**/local.properties
+**/captures/
+**/.externalNativeBuild/
+**/.cxx/
+
+# Native build files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+.ninja_deps
+.ninja_log
+
+# Generated binaries
+*.apk
+*.aab
+*.aar
+*.so
+*.dll
+*.dylib
+*.exe
+*.o
+*.obj
+*.a
+*.lib
+
+# Local files
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+!.env.example
