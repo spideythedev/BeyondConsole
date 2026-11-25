@@ -173,9 +173,14 @@ class MainActivity : Activity() {
         }
 
         val linkProperties = manager.getLinkProperties(network)
-        val localAddress = linkProperties?.linkAddresses
-            ?.mapNotNull { it.address as? Inet4Address }
-            ?.firstOrNull { !it.isLoopbackAddress && !it.isLinkLocalAddress }
+        if (linkProperties == null) {
+            scanResults.setText(R.string.scan_network_unavailable)
+            return
+        }
+
+        val localAddress = linkProperties.linkAddresses
+            .mapNotNull { it.address as? Inet4Address }
+            .firstOrNull { !it.isLoopbackAddress && !it.isLinkLocalAddress }
 
         if (localAddress == null) {
             scanResults.setText(R.string.scan_network_unavailable)
