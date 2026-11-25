@@ -10,13 +10,13 @@ The PS5 or PS4 runs the game. BeyondConsole handles the remote session: video, a
 
 ## Current state
 
-The Android app is an early shell. It can save one named console profile (name and local IP address) on the device and show the phone's current network transport. It does not discover consoles, verify that a saved address belongs to a PlayStation, register with PSN or stream gameplay yet.
+The Android app is an early shell. It can save multiple named console profiles (name and local IP address), select one, and remove saved entries. Profiles stay on the device. The app also shows the phone's current network transport. It does not discover consoles, verify that a saved address belongs to a PlayStation, register with PSN or stream gameplay yet. Android 8+ adaptive launcher icons and the Android 12+ system splash screen use the BeyondConsole brand mark.
 
 The desktop app has not been started.
 
 ## Repository
 
-- `app/` contains the Android project.
+- `app/` contains the Android project, adaptive launcher icon and splash branding.
 - `docs/architecture.md` records the implementation plan.
 - `docs/chiaki-review.md` covers the Remote Play code we are evaluating.
 - `docs/device-test-plan.md` defines the physical-device validation required before calling streaming ready.
@@ -34,7 +34,7 @@ gradle :app:assembleDebug
 
 Gradle writes the APK to `app/build/outputs/apk/debug/app-debug.apk`.
 
-GitHub Actions builds this app when Android source or build files change. The workflow uploads the debug APK as an artifact. The latest successful shell build is [run 45536201903](https://github.com/spideythedev/BeyondConsole/actions/runs/45536201903), with the `beyondconsole-android-debug` artifact. This build includes the named console profile form and on-device persistence.
+GitHub Actions builds this app when Android source or build files change. The workflow uploads the debug APK as an artifact. The Android workflow builds the debug APK and uploads it as `beyondconsole-android-debug`. The latest profile-and-branding changes are being built by GitHub Actions; check the Actions tab for the current result.
 
 ## Build the Remote Play reference
 
