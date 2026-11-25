@@ -6,9 +6,10 @@ import android.graphics.Typeface
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Patterns
 import android.view.Gravity
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -16,16 +17,25 @@ import android.widget.TextView
 import android.widget.Toast
 import org.json.JSONArray
 import org.json.JSONObject
+import java.net.Inet4Address
+import java.net.InetAddress
+import java.net.Socket
+import java.util.concurrent.Executors
+import java.util.concurrent.atomic.AtomicInteger
 
 class MainActivity : Activity() {
     private val preferences by lazy {
         getSharedPreferences("beyondconsole", Context.MODE_PRIVATE)
     }
+    private val mainHandler = Handler(Looper.getMainLooper())
+    private val scanExecutor = Executors.newFixedThreadPool(32)
 
     private lateinit var nameInput: EditText
     private lateinit var addressInput: EditText
     private lateinit var profileList: LinearLayout
     private lateinit var profileStatus: TextView
+    private lateinit var scanButton: Button
+    private lateinit var scanResults: TextView
 
     private data class ConsoleProfile(val name: String, val address: String)
 
@@ -37,20 +47,25 @@ class MainActivity : Activity() {
         addressInput = findViewById(R.id.consoleAddress)
         profileList = findViewById(R.id.consoleProfileList)
         profileStatus = findViewById(R.id.consoleProfileStatus)
+        scanButton = findViewById(R.id.scanConsoleButton)
+        scanResults = findViewById(R.id.scanResults)
 
         migrateLegacyProfile()
         renderProfiles()
 
-        findViewById<Button>(R.id.saveConsoleButton).setOnClickListener {
-            saveProfile()
-        }
-
+        findViewById<Button>(R.id.saveConsoleButton).setOnClickListener { saveProfile() }
+        scanButton.setOnClickListener { scanLocalNetwork() }
         updateNetworkStatus()
     }
 
     override fun onResume() {
         super.onResume()
         updateNetworkStatus()
+    }
+
+    override fun onDestroy() {
+        scanExecutor.shutdownNow()
+        super.onDestroy()
     }
 
     private fun saveProfile() {
@@ -61,7 +76,6 @@ class MainActivity : Activity() {
             nameInput.error = getString(R.string.console_name_required)
             return
         }
-
         if (address.isEmpty() || !Patterns.IP_ADDRESS.matcher(address).matches()) {
             addressInput.error = getString(R.string.invalid_ip)
             return
@@ -70,7 +84,6 @@ class MainActivity : Activity() {
         val profiles = readProfiles().toMutableList()
         val existing = profiles.indexOfFirst { it.address == address }
         val profile = ConsoleProfile(name, address)
-
         if (existing >= 0) profiles[existing] = profile else profiles.add(profile)
 
         writeProfiles(profiles)
@@ -88,7 +101,6 @@ class MainActivity : Activity() {
             profileStatus.setText(R.string.console_profile_empty)
             return
         }
-
         profileStatus.text = getString(R.string.console_profiles_count, profiles.size)
 
         profiles.forEach { profile ->
@@ -98,7 +110,6 @@ class MainActivity : Activity() {
                 setPadding(14, 12, 14, 12)
                 setBackgroundResource(R.drawable.panel_background)
             }
-
             val title = TextView(this).apply {
                 text = if (selected) getString(R.string.console_profile_selected, profile.name) else profile.name
                 setTextColor(getColor(R.color.text_primary))
@@ -129,13 +140,11 @@ class MainActivity : Activity() {
                 text = getString(R.string.delete_console)
                 setOnClickListener { deleteProfile(profile) }
             }
-
             actions.addView(select)
             actions.addView(delete)
             row.addView(title)
             row.addView(address)
             row.addView(actions)
-
             val params = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -145,17 +154,101 @@ class MainActivity : Activity() {
     }
 
     private fun deleteProfile(profile: ConsoleProfile) {
-        val profiles = readProfiles().filterNot { it.address == profile.address }
-        writeProfiles(profiles)
-
+        writeProfiles(readProfiles().filterNot { it.address == profile.address })
         if (preferences.getString(KEY_SELECTED_ADDRESS, null) == profile.address) {
             preferences.edit().remove(KEY_SELECTED_ADDRESS).apply()
             nameInput.text.clear()
             addressInput.text.clear()
         }
-
         renderProfiles()
     }
+
+    private fun scanLocalNetwork() {
+        val manager = getSystemService(ConnectivityManager::class.java)
+        val network = manager.activeNetwork
+        val capabilities = network?.let(manager::getNetworkCapabilities)
+        if (capabilities == null || !capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+            scanResults.setText(R.string.scan_wifi_required)
+            return
+        }
+
+        val linkProperties = manager.getLinkProperties(network)
+        val localAddress = linkProperties?.linkAddresses
+            ?.mapNotNull { it.address as? Inet4Address }
+            ?.firstOrNull { !it.isLoopbackAddress && !it.isLinkLocalAddress }
+
+        if (localAddress == null) {
+            scanResults.setText(R.string.scan_network_unavailable)
+            return
+        }
+
+        val link = linkProperties.linkAddresses.first { it.address == localAddress }
+        val prefix = link.prefixLength.coerceAtMost(24)
+        val ip = ipv4ToLong(localAddress.address)
+        val mask = if (prefix == 0) 0L else (0xffffffffL shl (32 - prefix)) and 0xffffffffL
+        val networkAddress = ip and mask
+        val broadcastAddress = networkAddress or (mask xor 0xffffffffL)
+        val hosts = (networkAddress + 1 until broadcastAddress).filter { it != ip }
+
+        scanButton.isEnabled = false
+        scanResults.text = getString(R.string.scan_running, hosts.size)
+        val found = java.util.Collections.synchronizedList(mutableListOf<String>())
+        val remaining = AtomicInteger(hosts.size)
+
+        if (hosts.isEmpty()) {
+            scanResults.setText(R.string.scan_no_hosts)
+            scanButton.isEnabled = true
+            return
+        }
+
+        hosts.forEach { host ->
+            scanExecutor.execute {
+                val address = longToIpv4(host)
+                val open = try {
+                    Socket().use { socket ->
+                        socket.connect(java.net.InetSocketAddress(address, REMOTE_PLAY_PORT), SCAN_TIMEOUT_MS)
+                    }
+                    true
+                } catch (_: Exception) {
+                    false
+                }
+
+                if (open) {
+                    found.add(address)
+                    mainHandler.post { showScanResults(found.toList(), false) }
+                }
+
+                if (remaining.decrementAndGet() == 0) {
+                    mainHandler.post {
+                        showScanResults(found.toList(), true)
+                        scanButton.isEnabled = true
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showScanResults(addresses: List<String>, finished: Boolean) {
+        scanResults.text = when {
+            addresses.isNotEmpty() -> getString(
+                if (finished) R.string.scan_candidates_found else R.string.scan_candidate_found,
+                addresses.sorted().joinToString("\n")
+            )
+            finished -> getString(R.string.scan_none_found)
+            else -> getString(R.string.scan_running_progress)
+        }
+    }
+
+    private fun ipv4ToLong(bytes: ByteArray): Long =
+        bytes.fold(0L) { result, byte -> (result shl 8) or (byte.toLong() and 0xff) }
+
+    private fun longToIpv4(value: Long): String =
+        InetAddress.getByAddress(byteArrayOf(
+            (value shr 24).toByte(),
+            (value shr 16).toByte(),
+            (value shr 8).toByte(),
+            value.toByte()
+        )).hostAddress ?: ""
 
     private fun readProfiles(): List<ConsoleProfile> {
         val raw = preferences.getString(KEY_PROFILES, null) ?: return emptyList()
@@ -176,9 +269,7 @@ class MainActivity : Activity() {
 
     private fun writeProfiles(profiles: List<ConsoleProfile>) {
         val array = JSONArray()
-        profiles.forEach { profile ->
-            array.put(JSONObject().put("name", profile.name).put("address", profile.address))
-        }
+        profiles.forEach { array.put(JSONObject().put("name", it.name).put("address", it.address)) }
         preferences.edit().putString(KEY_PROFILES, array.toString()).apply()
     }
 
@@ -200,13 +291,11 @@ class MainActivity : Activity() {
         val manager = getSystemService(ConnectivityManager::class.java)
         val network = manager.activeNetwork
         val capabilities = network?.let(manager::getNetworkCapabilities)
-
         if (capabilities == null) {
             status.setText(R.string.network_offline)
             details.setText(R.string.network_offline_details)
             return
         }
-
         status.setText(R.string.network_available)
         details.text = when {
             capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> getString(R.string.network_wifi)
@@ -223,5 +312,7 @@ class MainActivity : Activity() {
         private const val KEY_CONSOLE_ADDRESS = "console_address"
         private const val KEY_PROFILES = "console_profiles"
         private const val KEY_SELECTED_ADDRESS = "selected_console_address"
+        private const val REMOTE_PLAY_PORT = 9295
+        private const val SCAN_TIMEOUT_MS = 450
     }
 }
