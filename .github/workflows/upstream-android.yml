@@ -42,6 +42,11 @@ jobs:
         with:
           packages: ''
 
+      - name: Install host build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes protobuf-compiler
+
       - name: Install Android build dependencies
         run: |
           yes | sdkmanager --licenses >/dev/null
@@ -50,6 +55,22 @@ jobs:
             "build-tools;35.0.0" \
             "ndk;28.2.13676358" \
             "cmake;3.22.1"
+
+      - name: Configure upstream Android build
+        working-directory: upstream/chiaki-ng/android
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          gradle_file = Path("app/build.gradle")
+          source = gradle_file.read_text()
+          anchor = '"-DCHIAKI_ENABLE_TESTS=OFF",'
+          replacement = anchor + '\n                        "-DCURL_USE_LIBPSL=OFF",'
+          if anchor not in source:
+              raise SystemExit("Could not find the upstream CMake arguments block")
+          if "-DCURL_USE_LIBPSL=OFF" not in source:
+              gradle_file.write_text(source.replace(anchor, replacement, 1))
+          PY
 
       - name: Build upstream Android client
         working-directory: upstream/chiaki-ng/android
