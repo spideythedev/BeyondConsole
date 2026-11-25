@@ -6,8 +6,12 @@
 Your screen.</string>
     <string name="subtitle">A better way to play your PlayStation remotely on the devices you already have.</string>
     <string name="console_section">Your console</string>
-    <string name="console_help">Add the local IP address of a PlayStation on your network. This saves a profile only; console registration and streaming are not connected yet.</string>
+    <string name="console_help">Save a named console profile using its local IP address. This is a local profile only; registration and streaming are not connected yet.</string>
+    <string name="console_name_hint">Console name (e.g. Living room PS5)</string>
     <string name="console_address_hint">Console IP address</string>
+    <string name="console_name_required">Give this console a name.</string>
+    <string name="console_profile_empty">No console profile saved yet.</string>
+    <string name="console_profile_saved">Saved profile: %1$s · %2$s</string>
     <string name="save_console">Save console address</string>
     <string name="network_section">Network</string>
     <string name="checking_network">Checking connection…</string>
