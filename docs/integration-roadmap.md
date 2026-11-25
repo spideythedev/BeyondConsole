@@ -8,6 +8,8 @@ The upstream Android project can be configured and compiled in CI with JDK 17, A
 
 It proves that a reproducible Android APK can be produced from the pinned source. It does not prove that the APK installs or streams correctly on a physical phone, nor that BeyondConsole has Remote Play functionality.
 
+The downloaded APK was inspected after the workflow completed. It contains `libchiaki-jni.so` for `arm64-v8a`, `armeabi-v7a`, `x86` and `x86_64`. Upstream Gradle metadata identifies application ID `com.metallic.chiaki`, version `1.10.1`, version code `12`, minimum Android API 24 and target API 35. The APK is a 31,631,065-byte debug build. Its SHA-256 is `9a06c24cc63345dd57efdfc2625485fc76441ccfd88f33de534e2aa196b4bd37`. These are artifact-inspection results, not device-compatibility claims.
+
 ## Runtime pieces identified in upstream
 
 The Android implementation is not a standalone Kotlin library:
