@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f8fc">
+<meta name="description" content="BeyondConsole — a community-built project exploring console Remote Play on Android and desktop. Project status, downloads, setup guide and documentation.">
+<title>BeyondConsole — Your games, beyond the console</title>
+<link rel="icon" href="assets/brand/icon.svg" type="image/svg+xml">
+<style>
+:root{color-scheme:light;--bg:#f6f8fc;--paper:#fff;--ink:#202124;--muted:#667085;--line:#e7eaf0;--blue:#1a73e8;--blue-soft:#e8f0fe;--green:#188038;--green-soft:#e6f4ea;--max:1120px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}button{font:inherit}.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}.top{position:sticky;top:0;z-index:10;background:#f6f8fcE8;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:11px;color:var(--ink);font-weight:750;letter-spacing:-.03em}.brand img{width:36px;height:36px}.links{display:flex;align-items:center;gap:23px;font-size:13px;font-weight:600}.links a{color:#5f6368}.links .nav-cta{background:var(--blue);color:#fff;padding:9px 16px;border-radius:999px}.menu{display:none;border:0;background:transparent;font-size:24px;color:var(--ink)}.hero{padding:92px 0 68px}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 11px;border-radius:999px;background:var(--blue-soft);color:#174ea6;font-size:12px;font-weight:700}.dot{width:7px;height:7px;border-radius:50%;background:var(--green)}h1{max-width:790px;margin:22px 0 18px;font-size:clamp(42px,7vw,76px);line-height:1.03;letter-spacing:-.065em;font-weight:760}h1 span{color:var(--blue)}.lead{max-width:650px;color:var(--muted);font-size:18px;line-height:1.7}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 19px;border-radius:999px;font-weight:700;font-size:14px;border:1px solid var(--line);background:#fff;color:var(--ink)}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn:hover{text-decoration:none;filter:brightness(.97)}.fine{font-size:12px;color:var(--muted);margin-top:14px}.status{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:12px;margin-top:48px}.status>div{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:19px}.status strong{display:block;font-size:14px}.status small{color:var(--muted)}.pill{display:inline-block;margin-bottom:7px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:11px;font-weight:800;padding:4px 9px}.pill.blue{background:var(--blue-soft);color:#174ea6}.section{padding:68px 0;border-top:1px solid var(--line)}.kicker{font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--blue)}h2{font-size:clamp(28px,4vw,42px);line-height:1.12;letter-spacing:-.045em;margin:9px 0 12px}.intro{max-width:650px;color:var(--muted);margin:0 0 30px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px}.card h3{font-size:16px;margin:0 0 7px;letter-spacing:-.02em}.card p{font-size:14px;color:var(--muted);margin:0}.icon{width:38px;height:38px;border-radius:12px;background:var(--blue-soft);display:grid;place-items:center;color:var(--blue);font-size:18px;margin-bottom:17px}.notice{background:#fff8e1;border:1px solid #f5e4ad;border-radius:18px;padding:20px 22px;color:#6b5415}.notice strong{display:block;margin-bottom:5px}.steps{counter-reset:step;display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 20px 20px 64px;position:relative}.step:before{counter-increment:step;content:counter(step);position:absolute;left:20px;top:20px;width:29px;height:29px;display:grid;place-items:center;border-radius:50%;background:var(--blue-soft);color:var(--blue);font-size:13px;font-weight:800}.step h3{margin:0 0 5px;font-size:15px}.step p{margin:0;color:var(--muted);font-size:14px}.code{background:#202124;color:#e8eaed;padding:15px 18px;border-radius:13px;overflow:auto;font:13px/1.7 ui-monospace,SFMono-Regular,monospace}.doclist{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.doc{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:15px 17px;background:#fff;border:1px solid var(--line);border-radius:14px;color:var(--ink)}.doc span{font-size:13px;color:var(--muted)}.doc b{font-size:14px}.faq{border-bottom:1px solid var(--line);padding:17px 0}.faq summary{font-weight:700;cursor:pointer}.faq p{color:var(--muted);font-size:14px;margin:10px 0 0}.people{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.person{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;min-width:0}.person img{width:38px;height:38px;border-radius:50%}.person b{font-size:13px;display:block;overflow-wrap:anywhere}.person small{font-size:11px;color:var(--muted)}.footer{padding:34px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}.footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer a{margin-left:14px}.muted{color:var(--muted)}@media(max-width:760px){.links{display:none;position:absolute;top:71px;left:0;right:0;padding:18px 22px;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start}.links.open{display:flex}.menu{display:block}.hero{padding:66px 0 48px}.status{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.people{grid-template-columns:1fr 1fr}}@media(max-width:520px){.wrap{width:min(100% - 30px,var(--max))}.grid,.steps,.doclist{grid-template-columns:1fr}.lead{font-size:16px}.section{padding:52px 0}.card{padding:19px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap nav">
+<a class="brand" href="#top"><img src="assets/brand/icon.svg" alt=""><span>BeyondConsole</span></a>
+<button class="menu" id="menu" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+<nav class="links" id="links"><a href="#about">About</a><a href="#guide">Getting started</a><a href="#features">Features</a><a href="#docs">Documentation</a><a href="#faq">FAQ</a><a class="nav-cta" href="#download">Get the app</a></nav>
+</div></header>
+<main id="top">
+<section class="hero"><div class="wrap">
+<div class="eyebrow"><i class="dot"></i> Independent open-source project</div>
+<h1>Your games.<br><span>Beyond the console.</span></h1>
+<p class="lead">A community-built project exploring a better way to access the PlayStation Remote Play experience on Android — with desktop support on the roadmap.</p>
+<div class="actions"><a class="btn primary" href="#download">↓ &nbsp;Download & setup</a><a class="btn" href="https://github.com/spideythedev/BeyondConsole">View source on GitHub ↗</a></div>
+<p class="fine">Early development · Android app shell · No console streaming yet</p>
+<div class="status">
+<div><span class="pill">In development</span><strong>Android companion app</strong><small>Profiles and local network discovery</small></div>
+<div><span class="pill blue">Not implemented</span><strong>Remote Play streaming</strong><small>Session, video, audio and controls</small></div>
+<div><span class="pill blue">Planned</span><strong>Desktop experience</strong><small>Not started yet</small></div>
+</div>
+</div></section>
+<section class="section" id="about"><div class="wrap"><div class="kicker">01 / About</div><h2>Made for the games you already own.</h2><p class="intro">BeyondConsole is an independent project focused on making console Remote Play more approachable. The console runs the game; the client aims to bring the play session to another screen.</p>
+<div class="grid">
+<article class="card"><div class="icon">◎</div><h3>Console-first</h3><p>Designed around consoles players own or are authorised to access. No game files are hosted or redistributed.</p></article>
+<article class="card"><div class="icon">⌁</div><h3>Open development</h3><p>Source, decisions, documentation and issue tracking live in the public GitHub repository.</p></article>
+<article class="card"><div class="icon">◇</div><h3>Android today</h3><p>The current Android shell supports local console profiles and basic network discovery. Streaming is future work.</p></article>
+</div></div></section>
+<section class="section" id="features"><div class="wrap"><div class="kicker">02 / Current capabilities</div><h2>What works right now.</h2><p class="intro">A clear picture of what is available today, without pretending planned features are already shipped.</p>
+<div class="grid">
+<article class="card"><div class="icon">▣</div><h3>Console profiles</h3><p>Save multiple console names and local IPv4 addresses, select a profile, and remove entries. Profiles stay on your device.</p></article>
+<article class="card"><div class="icon">⌕</div><h3>LAN discovery</h3><p>Scan the connected IPv4 subnet for hosts accepting TCP connections on port 9295. A match is only a candidate, not device verification.</p></article>
+<article class="card"><div class="icon">⌁</div><h3>Network status</h3><p>See the active network transport and basic connection information provided by Android.</p></article>
+</div>
+<div class="notice" style="margin-top:16px"><strong>Important: Remote Play is not available yet.</strong>The app does not currently pair with PSN, authenticate with a console, negotiate a Remote Play session, decode video, play audio or transmit controller input. Do not install this expecting to stream PS5 games today.</div>
+</div></section>
+<section class="section" id="download"><div class="wrap"><div class="kicker">03 / Download</div><h2>Get the Android build.</h2><p class="intro">Debug APK builds are published by GitHub Actions when the Android source changes. The artifact is a ZIP containing the APK.</p>
+<div class="card"><span class="pill blue">Android · Debug build</span><h3>BeyondConsole Android</h3><p>Download the latest successful workflow artifact. GitHub may ask you to sign in to download workflow artifacts.</p><div class="actions"><a class="btn primary" href="https://github.com/spideythedev/BeyondConsole/actions/workflows/android.yml">Open latest Android builds ↗</a><a class="btn" href="https://github.com/spideythedev/BeyondConsole/releases">Check releases ↗</a></div></div>
+<h3 style="margin:28px 0 13px">Install guide</h3>
+<div class="steps">
+<div class="step"><h3>Open the build</h3><p>Go to the Android build workflow and open the newest run marked successful.</p></div>
+<div class="step"><h3>Download the artifact</h3><p>Find Artifacts at the bottom of the run page and download <b>beyondconsole-android-debug</b>. Sign in to GitHub if prompted.</p></div>
+<div class="step"><h3>Extract the ZIP</h3><p>Use Files or your preferred archive app to extract the downloaded ZIP. Locate <b>app-debug.apk</b>.</p></div>
+<div class="step"><h3>Install on Android</h3><p>Open the APK. If Android asks, allow your browser or file manager to install unknown apps, then continue installation.</p></div>
+<div class="step"><h3>Open BeyondConsole</h3><p>Launch the app and connect your phone to the same Wi-Fi network as your console.</p></div>
+<div class="step"><h3>Add your console</h3><p>Enter a label and the console's local IP address, then save the profile. This does not start a Remote Play session.</p></div>
+</div>
+<p class="fine">Use builds at your own discretion. Debug builds are intended for testing, may be less stable than a release, and are not signed as a public production release.</p>
+</div></section>
+<section class="section" id="guide"><div class="wrap"><div class="kicker">04 / First run guide</div><h2>Set up a console profile.</h2><div class="steps">
+<div class="step"><h3>Find the console IP</h3><p>On PS5, open Settings → Network → Connection Status → View Connection Status. Note the IPv4 address.</p></div>
+<div class="step"><h3>Connect to the same Wi-Fi</h3><p>Your Android device and console should be on the same reachable local network. Avoid guest Wi-Fi with client isolation.</p></div>
+<div class="step"><h3>Save a profile</h3><p>Give the console a memorable name, enter its local IPv4 address, and tap Save console address.</p></div>
+<div class="step"><h3>Try local discovery</h3><p>Tap Scan local network. Results only indicate a host accepted a TCP connection on port 9295; they do not prove it is a PlayStation.</p></div>
+</div>
+<h3 style="margin-top:28px">Build from source</h3><p class="muted">Requirements: JDK 17, Gradle 8.9 and Android SDK 35.</p><pre class="code">git clone https://github.com/spideythedev/BeyondConsole.git
+cd BeyondConsole
+gradle :app:assembleDebug</pre><p class="muted">APK output: <code>app/build/outputs/apk/debug/app-debug.apk</code>.</p>
+</div></section>
+<section class="section" id="docs"><div class="wrap"><div class="kicker">05 / Documentation</div><h2>Everything in one place.</h2><p class="intro">Project guides, technical notes and policies from the repository.</p>
+<div class="doclist">
+<a class="doc" href="https://github.com/spideythedev/BeyondConsole/blob/main/docs/USER-GUIDE.md"><div><b>User guide</b><br><span>Profiles, scanning and troubleshooting</span></div>↗</a>
+<a class="doc" href="https://github.com/spideythedev/BeyondConsole/blob/main/docs/FAQ.md"><div><b>Frequently asked questions</b><br><span>Common questions and limitations</span></div>↗</a>
+<a class="doc" href="https://github.com/spideythedev/BeyondConsole/blob/main/docs/ARCHITECTURE.md"><div><b>Architecture</b><br><span>App structure and planned design</span></div>↗</a>
+<a class="doc" href="https://github.com/spideythedev/BeyondConsole/blob/main/docs/DEPENDENCIES.md"><div><b>Dependencies</b><br><span>Libraries, tools and build versions</span></div>↗</a>
+<a class="doc" href="https://github.com/spideythedev/BeyondConsole/blob/main/docs/device-test-plan.md"><div><b>Device test plan</b><br><span>Checks before streaming is ready</span></div>↗</a>
+<a class="doc" href="https://github.com/spideythedev/BeyondConsole/blob/main/docs/chiaki-review.md"><div><b>Chiaki review</b><br><span>Remote Play implementation research</span></div>↗</a>
+<a class="doc" href="https://github.com/spideythedev/BeyondConsole/blob/main/docs/integration-roadmap.md"><div><b>Integration roadmap</b><br><span>Technical direction and release gates</span></div>↗</a>
+<a class="doc" href="https://github.com/spideythedev/BeyondConsole/blob/main/CONTRIBUTING.md"><div><b>Contributing</b><br><span>How to help the project</span></div>↗</a>
+<a class="doc" href="https://github.com/spideythedev/BeyondConsole/blob/main/SECURITY.md"><div><b>Security policy</b><br><span>Report vulnerabilities responsibly</span></div>↗</a>
+<a class="doc" href="https://github.com/spideythedev/BeyondConsole/blob/main/SUPPORT.md"><div><b>Support</b><br><span>Help, questions and issue reports</span></div>↗</a>
+<a class="doc" href="https://github.com/spideythedev/BeyondConsole/blob/main/LICENSE"><div><b>Apache License 2.0</b><br><span>Open-source license text</span></div>↗</a>
+<a class="doc" href="https://github.com/spideythedev/BeyondConsole/blob/main/NOTICE"><div><b>Notices & copyright</b><br><span>Attribution and trademark notices</span></div>↗</a>
+</div>
+</div></section>
+<section class="section" id="faq"><div class="wrap"><div class="kicker">06 / FAQ</div><h2>Good to know.</h2>
+<details class="faq"><summary>Can I play PS5 games on my Android phone with this now?</summary><p>Not yet. The current app is a companion shell with profiles and LAN discovery. Remote Play streaming is not implemented.</p></details>
+<details class="faq"><summary>Does the scan find or verify my PlayStation?</summary><p>No. It checks whether a host accepts TCP connections on port 9295. A result is only a possible match and is not identity verification.</p></details>
+<details class="faq"><summary>Do I need to enter my PSN password?</summary><p>No. The current app has no PSN login or account integration and does not request PSN credentials.</p></details>
+<details class="faq"><summary>Where are my saved profiles stored?</summary><p>On your Android device using SharedPreferences. They are not uploaded to a BeyondConsole backend.</p></details>
+<details class="faq"><summary>Why can't the scan find my console?</summary><p>Check that both devices share a reachable network, the console is awake, and your router does not isolate Wi-Fi clients. You can add the IP manually.</p></details>
+<details class="faq"><summary>Which Android versions are supported?</summary><p>Android 8.0 (API 26) and newer.</p></details>
+<details class="faq"><summary>Is this an official Sony app?</summary><p>No. BeyondConsole is an independent project and is not affiliated with or endorsed by Sony Interactive Entertainment.</p></details>
+<details class="faq"><summary>How do I report a bug or ask for help?</summary><p>Email <a href="mailto:hellospideydev@gmail.com">hellospideydev@gmail.com</a> or open an issue on <a href="https://github.com/spideythedev/BeyondConsole/issues">GitHub</a>.</p></details>
+</div></section>
+<section class="section" id="credits"><div class="wrap"><div class="kicker">07 / Credits</div><h2>Built in the open.</h2><p class="intro">Project founder and maintainer: Fahad Malik. Contributors are loaded from GitHub's public contributor data.</p><div id="contributors" class="people"><p class="muted">Loading public contributor list…</p></div><p class="fine">Contributor data is provided by the GitHub API. <a href="https://github.com/spideythedev/BeyondConsole/graphs/contributors">View full contribution graph ↗</a></p>
+<h3 style="margin-top:30px">Technology</h3><div class="grid"><article class="card"><h3>Android</h3><p>Kotlin, Android framework Views, XML layouts, SharedPreferences and Android networking APIs.</p></article><article class="card"><h3>Build</h3><p>Gradle 8.9, Android Gradle Plugin 8.7.3, Kotlin Gradle Plugin 2.0.21, JDK 17 and Android API 35.</p></article><article class="card"><h3>Website</h3><p>Plain HTML, CSS and JavaScript. No framework, build step, analytics or tracking scripts.</p></article></div>
+</div></section>
+<section class="section" id="privacy"><div class="wrap"><div class="kicker">08 / Privacy & legal</div><h2>Small footprint by design.</h2><div class="grid"><article class="card"><h3>On-device profiles</h3><p>Console names and local IP addresses are stored on the device in SharedPreferences.</p></article><article class="card"><h3>Local network scan</h3><p>The scan makes connection attempts to local addresses on TCP port 9295. Use it only on networks you are authorised to access.</p></article><article class="card"><h3>No project backend</h3><p>There is no BeyondConsole account or backend service in the current app. The credits page requests public GitHub contributor metadata.</p></article></div>
+<p class="intro" style="margin-top:24px">BeyondConsole is licensed under Apache License 2.0. PlayStation, PS4 and PS5 are trademarks of their respective owners. This project is independent and is not endorsed by Sony Interactive Entertainment. Only connect to consoles you own or are authorised to access.</p>
+</div></section>
+</main>
+<footer class="footer"><div class="wrap footer-row"><div><b>BeyondConsole</b><br>Copyright © 2026 Fahad Malik and contributors.</div><div><a href="https://github.com/spideythedev/BeyondConsole">GitHub</a><a href="mailto:hellospideydev@gmail.com">Support</a><a href="https://github.com/spideythedev/BeyondConsole/blob/main/LICENSE">License</a></div></div></footer>
+<script>
+const menu=document.getElementById('menu'),links=document.getElementById('links');
+menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));});
+links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false');}));
+fetch('https://api.github.com/repos/spideythedev/BeyondConsole/contributors?per_page=12')
+.then(r=>{if(!r.ok)throw new Error('GitHub API unavailable');return r.json()})
+.then(users=>{const root=document.getElementById('contributors');root.replaceChildren();users.forEach(user=>{const a=document.createElement('a');a.className='person';a.href=user.html_url;a.target='_blank';a.rel='noopener noreferrer';const img=document.createElement('img');img.src=user.avatar_url;img.alt='';img.loading='lazy';const box=document.createElement('div'),name=document.createElement('b'),meta=document.createElement('small');name.textContent=user.login;meta.textContent=user.contributions+' contributions';box.append(name,meta);a.append(img,box);root.append(a);});if(!users.length)root.textContent='No public contributors listed yet.';})
+.catch(()=>{document.getElementById('contributors').textContent='Contributor list is temporarily unavailable. Visit the GitHub contributors page.';});
+</script>
+</body></html>
