@@ -12,6 +12,10 @@ Your screen.</string>
     <string name="console_name_required">Give this console a name.</string>
     <string name="console_profile_empty">No console profile saved yet.</string>
     <string name="console_profile_saved">Saved profile: %1$s · %2$s</string>
+    <string name="console_profiles_count">%1$d saved consoles</string>
+    <string name="console_profile_selected">%1$s · Selected</string>
+    <string name="select_console">Select</string>
+    <string name="delete_console">Remove</string>
     <string name="save_console">Save console address</string>
     <string name="network_section">Network</string>
     <string name="checking_network">Checking connection…</string>
