@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BeyondConsole</string>
+    <string name="brand">BEYONDCONSOLE / ANDROID</string>
+    <string name="title">Your games.
+Your screen.</string>
+    <string name="subtitle">A better way to play your PlayStation remotely on the devices you already have.</string>
+    <string name="console_section">Your console</string>
+    <string name="console_help">Add the local IP address of a PlayStation on your network. This saves a profile only; console registration and streaming are not connected yet.</string>
+    <string name="console_address_hint">Console IP address</string>
+    <string name="save_console">Save console address</string>
+    <string name="network_section">Network</string>
+    <string name="checking_network">Checking connection…</string>
+    <string name="network_checking_details">Reading the current network state.</string>
+    <string name="network_offline">No internet connection</string>
+    <string name="network_offline_details">Connect to a network, then reopen this screen.</string>
+    <string name="network_available">Network available</string>
+    <string name="network_wifi">Connected over Wi-Fi</string>
+    <string name="network_ethernet">Connected over Ethernet</string>
+    <string name="network_cellular">Connected over mobile data</string>
+    <string name="network_connected">Connected to a network</string>
+    <string name="invalid_ip">Enter a valid IP address.</string>
+    <string name="console_saved">Console address saved on this device.</string>
+    <string name="development_note">Early development build. Remote Play registration, video, audio and controller input are not implemented yet.</string>
+</resources>
