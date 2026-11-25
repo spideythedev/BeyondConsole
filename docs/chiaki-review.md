@@ -42,6 +42,8 @@ The upstream repository includes AGPL-3.0-only with additional OpenSSL permissio
 
 Do not copy selected Kotlin or JNI files into the BeyondConsole app yet. They depend on the upstream database, preferences, model classes, resource IDs, native library, CMake options, third-party submodules and application lifecycle.
 
-First build and run the upstream Android app unchanged. Then decide whether to maintain a clearly attributed fork or to integrate the native core and the required Kotlin layers behind a BeyondConsole interface.
+The unchanged upstream Android client has now compiled successfully in GitHub Actions. Run [45535017493](https://github.com/spideythedev/BeyondConsole/actions/runs/45535017493) completed successfully on 25 November 2026 and uploaded the `chiaki-ng-android-reference` APK artifact. The downloaded APK is 31,631,065 bytes and includes `libchiaki-jni.so` for `arm64-v8a`, `armeabi-v7a`, `x86` and `x86_64`. This confirms that the pinned source and CI build configuration produce an APK; it does not prove installation or a working stream on a physical device.
 
-The current BeyondConsole Android app is a separate shell. It saves a console IP address locally and displays Android network status. It does not discover consoles, register accounts, connect to a Remote Play session or stream media.
+The next validation step is to install that artifact on a physical Android device and test discovery, registration, video, audio, controller input and reconnect behaviour using [the device test plan](device-test-plan.md). Do not begin integrating upstream code until that runtime test is complete. Afterward, decide whether to maintain a clearly attributed fork or integrate the native core and required Kotlin layers behind a BeyondConsole interface.
+
+The current BeyondConsole Android app remains a separate shell. It saves a console IP address locally and displays Android network status. It does not discover consoles, register accounts, connect to a Remote Play session or stream media.
