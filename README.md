@@ -1,48 +1,43 @@
 # BeyondConsole
 
-BeyondConsole is a work-in-progress project exploring a better way to use a PlayStation console from devices people already own.
+BeyondConsole is a project to make PlayStation Remote Play easier to use on Android and desktop devices.
 
-The first goal is simple: make Remote Play easier to set up and nicer to use on Android and desktop. A PS5 or PS4 still does the actual game processing. BeyondConsole is a client-side project; it does not turn console games into native Android or PC games.
+The PS5 or PS4 runs the game. BeyondConsole handles the remote session: video, audio and controller input. It will work with consoles the player owns or is allowed to access.
 
-## What's in the repository
+## Current state
 
-- `app/` — the first Android application shell.
-- `docs/architecture.md` — the current architecture and implementation plan.
-- `docs/chiaki-review.md` — notes from reviewing the existing Remote Play implementation.
+The Android app is an early shell. It can save a console's local IP address and show the phone's network status. Console discovery, registration and game streaming are not connected yet.
 
-The Android shell currently saves a console IP address locally and reports the device's network connection. It does not connect to a console or stream a game yet.
+The desktop app has not been started.
 
-## What we're working towards
+## Repository
 
-- Connect to a console the user owns or is allowed to access.
-- Stream video and audio to Android and desktop devices.
-- Send controller input back to the console.
-- Make touch controls practical on phones and tablets.
-- Show useful connection, latency and stream information.
-- Handle changing network conditions without making setup complicated.
+- `app/` contains the Android project.
+- `docs/architecture.md` records the implementation plan.
+- `docs/chiaki-review.md` covers the Remote Play code we are evaluating.
 
-## Build the Android app
+## Build Android
 
-The Android project uses JDK 17, Gradle 8.9 and Android SDK 35.
+The project uses JDK 17, Gradle 8.9 and Android SDK 35.
 
-From the repository root:
+Run this from the repository root:
 
 ```sh
 gradle :app:assembleDebug
 ```
 
-The APK is written to `app/build/outputs/apk/debug/app-debug.apk`.
+Gradle writes the APK to `app/build/outputs/apk/debug/app-debug.apk`.
 
-GitHub Actions also builds the debug APK on pushes and pull requests to `main`.
+The Android build also runs on GitHub Actions for pushes and pull requests to `main`.
 
 ## Remote Play implementation
 
-We're evaluating existing Remote Play work before writing protocol code ourselves. [chiaki-ng](https://github.com/chiaki-ng/chiaki-ng) is the main project under review. It already has an Android client, native streaming code and desktop support.
+We are reviewing [chiaki-ng](https://github.com/chiaki-ng/chiaki-ng) before writing any of the Remote Play protocol ourselves. Its repository already has an Android client, native streaming code and desktop support.
 
-Any code we reuse or build on will keep its original license and notices. chiaki-ng is licensed under AGPL-3.0, so its terms need to be followed if we integrate or modify it.
+chiaki-ng is licensed under AGPL-3.0. Any code taken from it must keep the original notices and follow the license. We will settle the integration and distribution details before shipping a build based on that code.
 
 ## Scope
 
-BeyondConsole is not affiliated with or endorsed by Sony Interactive Entertainment. PlayStation, PS4 and PS5 are trademarks of their respective owners.
+BeyondConsole is an independent project. It is not affiliated with or endorsed by Sony Interactive Entertainment. PlayStation, PS4 and PS5 are trademarks of their respective owners.
 
-The project will not distribute game files, bypass console security, or provide access to consoles without the owner's authorization.
+BeyondConsole will not distribute game files, bypass console security or connect to consoles without the owner's authorization.
