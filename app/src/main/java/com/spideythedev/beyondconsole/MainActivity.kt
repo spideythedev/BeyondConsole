@@ -1,7 +1,9 @@
 package com.spideythedev.beyondconsole
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Typeface
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -10,6 +12,9 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Patterns
 import android.view.Gravity
+import android.view.View
+import android.widget.PopupMenu
+import android.widget.ScrollView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -20,6 +25,8 @@ import org.json.JSONObject
 import java.net.Inet4Address
 import java.net.InetAddress
 import java.net.Socket
+import java.net.HttpURLConnection
+import java.net.URL
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -49,6 +56,7 @@ class MainActivity : Activity() {
         profileStatus = findViewById(R.id.consoleProfileStatus)
         scanButton = findViewById(R.id.scanConsoleButton)
         scanResults = findViewById(R.id.scanResults)
+        findViewById<TextView>(R.id.menuButton).setOnClickListener { showMenu(it) }
 
         migrateLegacyProfile()
         renderProfiles()
@@ -66,6 +74,122 @@ class MainActivity : Activity() {
     override fun onDestroy() {
         scanExecutor.shutdownNow()
         super.onDestroy()
+    }
+
+
+    private fun showMenu(anchor: View) {
+        val popup = PopupMenu(this, anchor)
+        val items = listOf(
+            "Documentation" to "documentation",
+            "User guide" to "guide",
+            "FAQs" to "faq",
+            "Dependencies" to "dependencies",
+            "License" to "license",
+            "About" to "about",
+            "Credits" to "credits",
+            "Tech stack" to "stack",
+            "Copyright" to "copyright",
+            "Privacy & data" to "privacy",
+            "Support" to "support"
+        )
+        items.forEach { (label, _) -> popup.menu.add(label) }
+        popup.setOnMenuItemClickListener { item ->
+            when (item.title.toString()) {
+                "Documentation" -> showInfo("BeyondConsole documentation", "BeyondConsole is an early Android companion project.\\n\\nUse this menu to find setup instructions, feature notes, technical details, licensing, contributors, and support.\\n\\nRepository: github.com/spideythedev/BeyondConsole")
+                "User guide" -> showInfo("User guide", "SAVE A CONSOLE\\n1. Find your console's local IPv4 address.\\n2. Enter a name and IP address on the home screen.\\n3. Tap Save console address.\\n4. Tap Select to choose a saved profile.\\n\\nSCAN YOUR WI-FI\\n1. Connect your phone and console to the same Wi-Fi network.\\n2. Tap Scan local network.\\n3. Treat matches as potential devices only.\\n\\nREMOVE A PROFILE\\nTap Remove beside the saved profile.\\n\\nThe current app does not pair with a console or stream gameplay yet.")
+                "FAQs" -> showInfo("Frequently asked questions", "DOES IT STREAM PS5 GAMES?\\nNot yet. Session negotiation, video, audio and controller streaming are not implemented.\\n\\nWHY WASN'T MY CONSOLE FOUND?\\nThe console may be asleep, on another subnet, or blocked by router isolation. You can add its IP manually.\\n\\nDOES A SCAN RESULT VERIFY A PLAYSTATION?\\nNo. It only checks TCP port 9295.\\n\\nWHERE ARE PROFILES STORED?\\nLocally on this Android device.\\n\\nWHICH ANDROID VERSIONS?\\nAndroid 8.0 (API 26) and newer.")
+                "Dependencies" -> showInfo("Dependencies", "APP RUNTIME\\nNo third-party runtime libraries are currently included.\\n\\nBUILD TOOLS\\nAndroid Gradle Plugin 8.7.3\\nKotlin Gradle Plugin 2.0.21\\nGradle 8.9 (CI provisioned)\\nJDK 17\\nAndroid compile SDK 35\\nMinimum SDK 26\\n\\nPLATFORM APIS\\nAndroid Views, SharedPreferences, ConnectivityManager, org.json and Java networking APIs.\\n\\nFull inventory: docs/DEPENDENCIES.md")
+                "License" -> showInfo("Apache License 2.0", "BeyondConsole is distributed under the Apache License, Version 2.0.\\n\\nYou may use, modify and redistribute the project under the license terms. Keep copyright and license notices, include the license with distributions, and mark changed files. The license also includes an express patent grant.\\n\\nFull text: https://www.apache.org/licenses/LICENSE-2.0\\n\\nSee the LICENSE file in the repository.")
+                "About" -> showInfo("About BeyondConsole", "BeyondConsole is an independent open-source project exploring ways to make console gaming more accessible across devices, including Android.\\n\\nThe current build is an early companion app with local console profiles and basic LAN port discovery. Remote Play compatibility is not implemented yet.\\n\\nBuilt by Fahad Malik (SpydeY).")
+                "Credits" -> loadContributors()
+                "Tech stack" -> showInfo("Technology", "KOTLIN\\nAndroid application logic.\\n\\nANDROID SDK\\nNative Views, XML layouts, ConnectivityManager and SharedPreferences.\\n\\nJAVA STANDARD LIBRARY\\nSockets, HTTP connections, executors and JSON parsing.\\n\\nGRADLE\\nBuild and dependency management.\\n\\nGITHUB ACTIONS\\nAutomated Android debug builds.")
+                "Copyright" -> showInfo("Copyright & trademarks", "Copyright © 2026 Fahad Malik and BeyondConsole contributors.\\n\\nLicensed under the Apache License, Version 2.0. You may obtain a copy at https://www.apache.org/licenses/LICENSE-2.0.\\n\\nPlayStation and PS5 are trademarks of Sony Interactive Entertainment. BeyondConsole is an independent community project and is not affiliated with, endorsed by, or sponsored by Sony Interactive Entertainment.")
+                "Privacy & data" -> showInfo("Privacy & data", "Console names and local IP addresses are stored on this device using SharedPreferences.\\n\\nLAN discovery sends TCP connection attempts to local addresses on port 9295.\\n\\nThe Credits screen contacts the public GitHub API to retrieve repository contributor names and contribution counts.\\n\\nThe current app has no BeyondConsole account, analytics SDK, or project backend. Do not share private network details in public support requests.")
+                "Support" -> {
+                    val intent = Intent(Intent.ACTION_SENDTO).apply {
+                        data = android.net.Uri.parse("mailto:hellospideydev@gmail.com")
+                        putExtra(Intent.EXTRA_SUBJECT, "BeyondConsole support")
+                    }
+                    startActivity(intent)
+                }
+            }
+            true
+        }
+        popup.show()
+    }
+
+    private fun showInfo(title: String, message: String) {
+        val content = TextView(this).apply {
+            text = message
+            textSize = 14f
+            setTextColor(getColor(R.color.text_primary))
+            setPadding(dp(20), dp(18), dp(20), dp(18))
+            setTextIsSelectable(true)
+            setLineSpacing(dp(4).toFloat(), 1f)
+        }
+        val scroll = ScrollView(this).apply { addView(content) }
+        AlertDialog.Builder(this)
+            .setTitle(title)
+            .setView(scroll)
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
+    }
+
+    private fun loadContributors() {
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Project credits")
+            .setMessage("Loading contributors from GitHub…")
+            .setNegativeButton("Close", null)
+            .create()
+        dialog.show()
+
+        scanExecutor.execute {
+            val message = try {
+                val connection = URL(
+                    "https://api.github.com/repos/spideythedev/BeyondConsole/contributors?per_page=100"
+                ).openConnection() as HttpURLConnection
+                connection.connectTimeout = 8000
+                connection.readTimeout = 8000
+                connection.setRequestProperty("Accept", "application/vnd.github+json")
+                connection.setRequestProperty("X-GitHub-Api-Version", "2022-11-28")
+                try {
+                    val response = connection.inputStream.bufferedReader().use { it.readText() }
+                    val contributors = JSONArray(response)
+                    val lines = mutableListOf(
+                        "PROJECT FOUNDER",
+                        "Fahad Malik (SpydeY) — project creator and maintainer",
+                        "",
+                        "GITHUB CONTRIBUTORS"
+                    )
+                    if (contributors.length() == 0) {
+                        lines.add("No additional GitHub contributors are listed yet.")
+                    } else {
+                        for (index in 0 until contributors.length()) {
+                            val person = contributors.getJSONObject(index)
+                            val login = person.optString("login", "Unknown")
+                            val count = person.optInt("contributions", 0)
+                            if (login.equals("spideythedev", true)) continue
+                            lines.add("$login — $count contributions")
+                        }
+                        if (lines.size == 4) lines.add("No additional contributors are listed yet.")
+                    }
+                    lines.add("")
+                    lines.add("Contributor data is retrieved from the public GitHub Contributors API.")
+                    lines.add("https://github.com/spideythedev/BeyondConsole/graphs/contributors")
+                    lines.joinToString("\\n")
+                } finally {
+                    connection.disconnect()
+                }
+            } catch (_: Exception) {
+                "PROJECT FOUNDER\\nFahad Malik (SpydeY) — project creator and maintainer\\n\\nCould not load the live contributor list. Check your connection or visit:\\nhttps://github.com/spideythedev/BeyondConsole/graphs/contributors"
+            }
+            mainHandler.post {
+                if (!isFinishing && dialog.isShowing) {
+                    dialog.dismiss()
+                    showInfo("Project credits", message)
+                }
+            }
+        }
     }
 
     private fun saveProfile() {
