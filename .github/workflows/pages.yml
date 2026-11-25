@@ -10,9 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: github-pages
@@ -20,24 +18,21 @@ concurrency:
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
+      - name: Prepare website
+        run: |
+          mkdir -p site/assets/brand
+          cp index.html site/index.html
+          cp assets/brand/icon.svg site/assets/brand/icon.svg
 
-      - name: Upload website
-        uses: actions/upload-pages-artifact@v3
+      - name: Publish gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: .
-
-      - name: Deploy website
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./site
+          force_orphan: true
