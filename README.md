@@ -6,7 +6,7 @@ The PS5 or PS4 runs the game. BeyondConsole handles the remote session: video, a
 
 ## Current state
 
-The Android app is an early shell. It can save a console's local IP address and show the phone's network status. Console discovery, registration and game streaming are not connected yet.
+The Android app is an early shell. It can save one named console profile (name and local IP address) on the device and show the phone's current network transport. It does not discover consoles, verify that a saved address belongs to a PlayStation, register with PSN or stream gameplay yet.
 
 The desktop app has not been started.
 
@@ -30,7 +30,7 @@ gradle :app:assembleDebug
 
 Gradle writes the APK to `app/build/outputs/apk/debug/app-debug.apk`.
 
-GitHub Actions builds this app when Android source or build files change. The workflow uploads the debug APK as an artifact. The latest successful shell build is [run 45534271331](https://github.com/spideythedev/BeyondConsole/actions/runs/45534271331), with the `beyondconsole-android-debug` artifact.
+GitHub Actions builds this app when Android source or build files change. The workflow uploads the debug APK as an artifact. The latest successful shell build is [run 45536201903](https://github.com/spideythedev/BeyondConsole/actions/runs/45536201903), with the `beyondconsole-android-debug` artifact. This build includes the named console profile form and on-device persistence.
 
 ## Build the Remote Play reference
 
