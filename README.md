@@ -15,6 +15,7 @@ The desktop app has not been started.
 - `app/` contains the Android project.
 - `docs/architecture.md` records the implementation plan.
 - `docs/chiaki-review.md` covers the Remote Play code we are evaluating.
+- `docs/device-test-plan.md` defines the physical-device validation required before calling streaming ready.
 
 ## Build the Android shell
 
