@@ -1,5 +1,9 @@
 # BeyondConsole
 
+<p align="center">
+  <img src="assets/brand/logo.svg" alt="BeyondConsole logo" width="180" />
+</p>
+
 BeyondConsole is a project to make PlayStation Remote Play easier to use on Android and desktop devices.
 
 The PS5 or PS4 runs the game. BeyondConsole handles the remote session: video, audio and controller input. It will work with consoles the player owns or is allowed to access.
