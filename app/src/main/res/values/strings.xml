@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BeyondConsole</string>
-    <string name="brand">BEYONDCONSOLE / ANDROID</string>
+    <string name="brand">BEYONDCONSOLE</string>
+    <string name="brand_subtitle">PLAY FROM ANYWHERE</string>
+    <string name="hero_eyebrow">REMOTE PLAY • YOUR SETUP</string>
+    <string name="controller_art_description">Game controller illustration with directional pad, thumbsticks and action buttons</string>
+    <string name="discovery_icon_description">Local network radar</string>
+    <string name="local_profiles_label">LOCAL PROFILES</string>
+    <string name="lan_badge">LAN SCAN</string>
     <string name="title">Your games.
 Your screen.</string>
     <string name="subtitle">A better way to play your PlayStation remotely on the devices you already have.</string>
