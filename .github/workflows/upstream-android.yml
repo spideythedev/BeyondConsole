@@ -1,0 +1,55 @@
+name: Upstream Android build
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Check out BeyondConsole
+        uses: actions/checkout@v4
+
+      - name: Check out chiaki-ng
+        uses: actions/checkout@v4
+        with:
+          repository: chiaki-ng/chiaki-ng
+          ref: 43728af2e639fecb8a7af1cd68c29820a40de973
+          path: upstream/chiaki-ng
+          submodules: recursive
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android build dependencies
+        run: |
+          yes | sdkmanager --licenses >/dev/null
+          sdkmanager \
+            "platforms;android-35" \
+            "build-tools;35.0.0" \
+            "ndk;28.2.13676358" \
+            "cmake;3.22.1"
+
+      - name: Build upstream Android client
+        working-directory: upstream/chiaki-ng/android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon :app:assembleDebug
+
+      - name: Upload upstream APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: chiaki-ng-android-reference
+          path: upstream/chiaki-ng/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
