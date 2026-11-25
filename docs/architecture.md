@@ -4,7 +4,7 @@ These are working notes. They describe the direction of the project, not feature
 
 ## First target
 
-Android comes first. The initial app shell is in `app/`. It can save a console IP address on the device and show the current network state. It does not perform console discovery, registration or streaming.
+Android comes first. The initial app shell is in `app/`. It can save one named console profile (name plus local IP address) on the device and show the current network transport. It does not perform console discovery, registration or streaming.
 
 The next milestone is to get a real Remote Play session working. That means console registration, session setup, video, audio and controller input. The UI should follow the working session layer, not pretend those pieces are ready.
 
