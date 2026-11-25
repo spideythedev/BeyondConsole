@@ -128,6 +128,9 @@ class MainActivity : Activity() {
             }
             val select = Button(this).apply {
                 text = getString(R.string.select_console)
+                setBackgroundResource(R.drawable.button_secondary)
+                setTextColor(getColor(R.color.accent))
+                textAllCaps = false
                 isEnabled = !selected
                 setOnClickListener {
                     nameInput.setText(profile.name)
@@ -138,6 +141,9 @@ class MainActivity : Activity() {
             }
             val delete = Button(this).apply {
                 text = getString(R.string.delete_console)
+                setBackgroundResource(R.drawable.button_secondary)
+                setTextColor(getColor(R.color.text_secondary))
+                textAllCaps = false
                 setOnClickListener { deleteProfile(profile) }
             }
             actions.addView(select)
