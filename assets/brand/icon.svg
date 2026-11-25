@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" role="img" aria-labelledby="title desc">
+  <title id="title">BeyondConsole</title>
+  <desc id="desc">A clean B-shaped gaming mark with a blue-to-teal orbit.</desc>
+  <defs>
+    <linearGradient id="orbit" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3478F6"/>
+      <stop offset="1" stop-color="#20D6B0"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#B8C5D5"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#orbit)" stroke-width="22" stroke-linecap="round">
+    <path d="M142 443C92 340 184 184 348 137c112-32 221 3 246 79"/>
+    <path d="M578 277c-14 131-172 242-331 228"/>
+  </g>
+  <path fill="url(#mark)" fill-rule="evenodd" d="M211 173h205c95 0 150 49 150 124 0 48-25 82-67 101 55 17 87 56 87 112 0 80-62 132-162 132H211c-17 0-28-13-22-29l40-99 54-136-54-136-40-40c-6-14 5-29 22-29Zm112 91-45 113h137c36 0 55-19 55-53 0-38-23-60-64-60H323Zm-2 202-42 109h157c47 0 72-20 72-57 0-34-25-52-70-52H321Z" clip-rule="evenodd"/>
+  <g fill="#172235">
+    <rect x="290" y="340" width="24" height="72" rx="7"/>
+    <rect x="266" y="364" width="72" height="24" rx="7"/>
+    <circle cx="453" cy="352" r="12"/>
+    <circle cx="487" cy="386" r="12"/>
+    <circle cx="419" cy="386" r="12"/>
+    <circle cx="453" cy="420" r="12"/>
+  </g>
+</svg>
