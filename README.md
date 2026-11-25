@@ -1,5 +1,7 @@
 # BeyondConsole
 
+Project website: https://spideythedev.github.io/BeyondConsole/
+
 <p align="center">
   <img src="assets/brand/logo.svg" alt="BeyondConsole logo" width="180" />
 </p>
