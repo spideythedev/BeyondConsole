@@ -72,15 +72,47 @@ jobs:
               gradle_file.write_text(source.replace(anchor, replacement, 1))
           PY
 
-      - name: Build upstream Android client
+      - name: Apply BeyondConsole Android identity
+        working-directory: upstream/chiaki-ng/android
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          strings = Path("app/src/main/res/values/strings.xml")
+          xml = strings.read_text()
+          xml, count = re.subn(
+              r'(<string\\s+name="app_name">).*?(</string>)',
+              r'\\1BeyondConsole\\2',
+              xml,
+              count=1
+          )
+          if count != 1:
+              raise SystemExit("Could not find the upstream app_name resource")
+          strings.write_text(xml)
+
+          gradle = Path("app/build.gradle")
+          source = gradle.read_text()
+          source, count = re.subn(
+              r'applicationId "com\\.metallic\\.chiaki"',
+              'applicationId "com.spideydev.beyondconsole"',
+              source,
+              count=1
+          )
+          if count != 1:
+              raise SystemExit("Could not find the upstream applicationId")
+          gradle.write_text(source)
+          PY
+
+      - name: Build BeyondConsole Android client
         working-directory: upstream/chiaki-ng/android
         run: |
           chmod +x gradlew
           ./gradlew --no-daemon :app:assembleDebug
 
-      - name: Upload upstream APK
+      - name: Upload BeyondConsole APK
         uses: actions/upload-artifact@v4
         with:
-          name: chiaki-ng-android-reference
+          name: beyondconsole-android-remote-play
           path: upstream/chiaki-ng/android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
