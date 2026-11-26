@@ -35,7 +35,7 @@
 <div class="grid">
 <article class="card"><div class="icon">◎</div><h3>Console-first</h3><p>Designed around consoles players own or are authorised to access. No game files are hosted or redistributed.</p></article>
 <article class="card"><div class="icon">⌁</div><h3>Open development</h3><p>Source, decisions, documentation and issue tracking live in the public GitHub repository.</p></article>
-<article class="card"><div class="icon">◇</div><h3>Android today</h3><p>The current Android shell supports local console profiles and basic network discovery. Streaming is future work.</p></article>
+<article class="card"><div class="icon">◇</div><h3>Android today</h3><p>The Remote Play build is based on the pinned Chiaki-ng Android client and is being rebranded for BeyondConsole. Physical-device validation is still required.</p></article>
 </div></div></section>
 <section class="section" id="features"><div class="wrap"><div class="kicker">02 / Current capabilities</div><h2>What works right now.</h2><p class="intro">A clear picture of what is available today, without pretending planned features are already shipped.</p>
 <div class="grid">
@@ -43,14 +43,14 @@
 <article class="card"><div class="icon">⌕</div><h3>LAN discovery</h3><p>Scan the connected IPv4 subnet for hosts accepting TCP connections on port 9295. A match is only a candidate, not device verification.</p></article>
 <article class="card"><div class="icon">⌁</div><h3>Network status</h3><p>See the active network transport and basic connection information provided by Android.</p></article>
 </div>
-<div class="notice" style="margin-top:16px"><strong>Important: Remote Play is not available yet.</strong>The app does not currently pair with PSN, authenticate with a console, negotiate a Remote Play session, decode video, play audio or transmit controller input. Do not install this expecting to stream PS5 games today.</div>
+<div class="notice" style="margin-top:16px"><strong>Important: Remote Play is not available yet.</strong>The original BeyondConsole shell does not stream. The new Chiaki-ng-based Android build is the streaming client; test it with your own console and report any device-specific issues before treating it as a stable release.</div>
 </div></section>
 <section class="section" id="download"><div class="wrap"><div class="kicker">03 / Download</div><h2>Get the Android build.</h2><p class="intro">Debug APK builds are published by GitHub Actions when the Android source changes. The artifact is a ZIP containing the APK.</p>
-<div class="card"><span class="pill blue">Android · Debug build</span><h3>BeyondConsole Android</h3><p>Download the latest successful workflow artifact. GitHub may ask you to sign in to download workflow artifacts.</p><div class="actions"><a class="btn primary" href="https://github.com/spideythedev/BeyondConsole/actions/workflows/android.yml">Open latest Android builds ↗</a><a class="btn" href="https://github.com/spideythedev/BeyondConsole/releases">Check releases ↗</a></div></div>
+<div class="card"><span class="pill blue">Android · Debug build</span><h3>BeyondConsole Android</h3><p>Download the latest successful workflow artifact. GitHub may ask you to sign in to download workflow artifacts.</p><div class="actions"><a class="btn primary" href="https://github.com/spideythedev/BeyondConsole/actions/workflows/upstream-android.yml">Open latest Android builds ↗</a><a class="btn" href="https://github.com/spideythedev/BeyondConsole/releases">Check releases ↗</a></div></div>
 <h3 style="margin:28px 0 13px">Install guide</h3>
 <div class="steps">
 <div class="step"><h3>Open the build</h3><p>Go to the Android build workflow and open the newest run marked successful.</p></div>
-<div class="step"><h3>Download the artifact</h3><p>Find Artifacts at the bottom of the run page and download <b>beyondconsole-android-debug</b>. Sign in to GitHub if prompted.</p></div>
+<div class="step"><h3>Download the artifact</h3><p>Find Artifacts at the bottom of the run page and download <b>beyondconsole-android-remote-play</b>. Sign in to GitHub if prompted.</p></div>
 <div class="step"><h3>Extract the ZIP</h3><p>Use Files or your preferred archive app to extract the downloaded ZIP. Locate <b>app-debug.apk</b>.</p></div>
 <div class="step"><h3>Install on Android</h3><p>Open the APK. If Android asks, allow your browser or file manager to install unknown apps, then continue installation.</p></div>
 <div class="step"><h3>Open BeyondConsole</h3><p>Launch the app and connect your phone to the same Wi-Fi network as your console.</p></div>
