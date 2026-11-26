@@ -36,6 +36,10 @@ BeyondConsole UI
 
 A working session therefore needs much more than copying a single streaming class.
 
+## License decision
+
+The project owner approved changing BeyondConsole to AGPL-3.0 with the additional OpenSSL permission. The repository `LICENSE` now contains the complete license text and the OpenSSL permission; `NOTICE` records the pinned Chiaki-ng reference. This resolves the project's chosen licensing direction, but is not a substitute for preserving all upstream notices and reviewing the exact licenses of every bundled dependency before redistribution.
+
 ## Recommended engineering sequence
 
 ### Gate 1 — validate the reference app on hardware
@@ -48,7 +52,7 @@ Record device model, Android version, console generation, network topology and s
 
 There are three realistic strategies:
 
-1. **Maintain a clearly attributed chiaki-ng-based Android fork.** This is the shortest technical path because it retains the working app, native build, resources, storage and lifecycle together.
+1. **Maintain a clearly attributed Chiaki-ng-based Android fork.** This is the shortest technical path because it retains the working app, native build, resources, storage and lifecycle together.
 2. **Integrate the upstream Android and native layers behind a BeyondConsole UI.** This may provide a more distinct product architecture, but it is still a derivative integration and must be reviewed under the upstream license. Keep the complete native dependency/build chain; do not cherry-pick isolated Kotlin files.
 3. **Implement a genuinely independent Remote Play client.** This avoids importing upstream implementation code, but requires substantial protocol, registration, codec, audio, input and compatibility engineering. It is not a shortcut.
 
