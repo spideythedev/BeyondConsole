@@ -40,6 +40,10 @@ A working session therefore needs much more than copying a single streaming clas
 
 The project owner approved changing BeyondConsole to AGPL-3.0 with the additional OpenSSL permission. The repository `LICENSE` now contains the complete license text and the OpenSSL permission; `NOTICE` records the pinned Chiaki-ng reference. This resolves the project's chosen licensing direction, but is not a substitute for preserving all upstream notices and reviewing the exact licenses of every bundled dependency before redistribution.
 
+## Current integration work
+
+The repository license and notice have been updated following owner approval. The upstream Android workflow now applies the BeyondConsole app label and package ID (`com.spideydev.beyondconsole`) to the pinned Chiaki-ng Android application and publishes a separate `beyondconsole-android-remote-play` artifact. This is a first branded build path, not a claim that upstream source has been merged into the repository. The upstream icon and remaining Chiaki branding still need a deliberate replacement, and the resulting APK needs real-device validation.
+
 ## Recommended engineering sequence
 
 ### Gate 1 — validate the reference app on hardware
