@@ -12,6 +12,8 @@ The PS5 or PS4 runs the game. BeyondConsole handles the remote session: video, a
 
 ## Current state
 
+The repository license is now AGPL-3.0 with the additional OpenSSL permission used by the pinned Chiaki-ng reference. See [LICENSE](LICENSE) and [NOTICE](NOTICE). This license change prepares the project for a Chiaki-ng-based implementation; it does not mean the current BeyondConsole app shell has gained streaming.
+
 The Android app uses a dark, controller-inspired interface with a remote-play hero panel, thumbstick/action-button artwork, compact network status, and focused console controls. It can save multiple named console profiles (name and local IP address), select one, and remove saved entries. Profiles stay on the device. It shows the current network transport and can scan the connected Wi-Fi subnet for hosts accepting TCP connections on port 9295, the PlayStation Remote Play control port. A port match is only a candidate; it does not identify or verify a PlayStation. Console registration, session negotiation, video, audio and controller streaming are not implemented yet. Android 8+ adaptive launcher icons and the Android 12+ system splash screen use the BeyondConsole brand mark.
 
 The desktop app has not been started.
@@ -25,7 +27,7 @@ The desktop app has not been started.
 - [Contributing](CONTRIBUTING.md)
 - [Security](SECURITY.md)
 - [Support](SUPPORT.md)
-- [License](LICENSE) — Apache License 2.0
+- [License](LICENSE) — GNU Affero General Public License 3.0 with OpenSSL permission
 
 ## Repository
 
