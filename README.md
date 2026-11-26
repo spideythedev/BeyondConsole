@@ -14,7 +14,7 @@ The PS5 or PS4 runs the game. BeyondConsole handles the remote session: video, a
 
 The repository license is now AGPL-3.0 with the additional OpenSSL permission used by the pinned Chiaki-ng reference. See [LICENSE](LICENSE) and [NOTICE](NOTICE). This license change prepares the project for a Chiaki-ng-based implementation; it does not mean the current BeyondConsole app shell has gained streaming.
 
-The Android app uses a dark, controller-inspired interface with a remote-play hero panel, thumbstick/action-button artwork, compact network status, and focused console controls. It can save multiple named console profiles (name and local IP address), select one, and remove saved entries. Profiles stay on the device. It shows the current network transport and can scan the connected Wi-Fi subnet for hosts accepting TCP connections on port 9295, the PlayStation Remote Play control port. A port match is only a candidate; it does not identify or verify a PlayStation. Console registration, session negotiation, video, audio and controller streaming are not implemented yet. Android 8+ adaptive launcher icons and the Android 12+ system splash screen use the BeyondConsole brand mark.
+The original BeyondConsole shell can save console profiles and scan the local network, but it does not implement Remote Play itself. The new Android workflow builds a branded package from the pinned Chiaki-ng Android implementation, which contains discovery, registration, streaming, video/audio decoding and controller support. This is an upstream-derived build, not yet a merged native BeyondConsole implementation; physical-device validation is still required. Android 8+ adaptive launcher icons and the Android 12+ system splash screen use the BeyondConsole brand mark.
 
 The desktop app has not been started.
 
@@ -55,7 +55,7 @@ GitHub Actions builds this app when Android source or build files change. The wo
 
 The upstream Android client has its own Gradle and native CMake build. To check it, open the Actions tab and run **Upstream Android build**. That workflow checks out chiaki-ng at a pinned commit, initializes its submodules and attempts to assemble its Android APK.
 
-The pinned upstream Android source now builds successfully in [Actions run 45535017493](https://github.com/spideythedev/BeyondConsole/actions/runs/45535017493); its APK is uploaded as the `chiaki-ng-android-reference` artifact. This confirms the CI build path, not physical-device streaming. Install and validate that APK using [docs/device-test-plan.md](docs/device-test-plan.md). The source review and integration sequence are in [docs/chiaki-review.md](docs/chiaki-review.md) and [docs/integration-roadmap.md](docs/integration-roadmap.md).
+The pinned Chiaki-ng Android source is built by [the BeyondConsole Android workflow](.github/workflows/upstream-android.yml). The workflow applies the BeyondConsole app label and application ID, then uploads `beyondconsole-android-remote-play`. The upstream implementation remains intact; the build must still be tested on a physical PS5 and Android device. Install and validate that APK using [docs/device-test-plan.md](docs/device-test-plan.md). The source review and integration sequence are in [docs/chiaki-review.md](docs/chiaki-review.md) and [docs/integration-roadmap.md](docs/integration-roadmap.md).
 
 ## Remote Play implementation
 
