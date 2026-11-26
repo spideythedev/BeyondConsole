@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">BeyondConsole</title>
+  <desc id="desc">A minimal game controller mark in white with blue and mint controls on a deep navy field.</desc>
+  <rect width="512" height="512" rx="112" fill="#080D17"/>
+  <path d="M154 174h204c43 0 67 23 78 69l24 103c9 39-36 65-65 37l-59-57H176l-59 57c-29 28-74 2-65-37l24-103c11-46 35-69 78-69Z" fill="#F4F7FB"/>
+  <path d="M153 229h22v66h-22z" fill="#3478F6"/>
+  <path d="M131 251h66v22h-66z" fill="#3478F6"/>
+  <circle cx="333" cy="238" r="15" fill="#20D6B0"/>
+  <circle cx="369" cy="274" r="15" fill="#3478F6"/>
+  <circle cx="297" cy="274" r="15" fill="#3478F6"/>
+  <circle cx="333" cy="310" r="15" fill="#20D6B0"/>
+</svg>
