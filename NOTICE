@@ -1,13 +1,18 @@
 BeyondConsole
-Copyright 2026 Fahad Malik
+Copyright 2026 Fahad Malik and contributors.
 
-BeyondConsole is licensed under the Apache License, Version 2.0.
-A copy of the license is included in the LICENSE file and is available at:
-https://www.apache.org/licenses/LICENSE-2.0
+The project is distributed under the GNU Affero General Public License,
+version 3, with the additional OpenSSL linking permission reproduced in
+the LICENSE file. The full license text is available at:
+https://www.gnu.org/licenses/agpl-3.0.html
 
-Project repository:
-https://github.com/spideythedev/BeyondConsole
+Remote Play implementation reference:
+Chiaki-ng, https://github.com/chiaki-ng/chiaki-ng
+Pinned reference commit: 43728af2e639fecb8a7af1cd68c29820a40de973
+Chiaki-ng is licensed under AGPL-3.0-only with an additional permission
+for linking with OpenSSL. Its original notices and license files must
+be preserved in any source distribution that includes Chiaki-ng code.
 
-PlayStation and PS5 are trademarks of Sony Interactive Entertainment.
-BeyondConsole is an independent, community project and is not affiliated with,
+PlayStation, PS4 and PS5 are trademarks of Sony Interactive Entertainment.
+BeyondConsole is an independent project and is not affiliated with,
 endorsed by, or sponsored by Sony Interactive Entertainment.
