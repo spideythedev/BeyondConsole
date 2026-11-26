@@ -77,31 +77,22 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import re
 
           strings = Path("app/src/main/res/values/strings.xml")
           xml = strings.read_text()
-          xml, count = re.subn(
-              r'(<string\\s+name="app_name">).*?(</string>)',
-              r'\\1BeyondConsole\\2',
-              xml,
-              count=1
-          )
-          if count != 1:
-              raise SystemExit("Could not find the upstream app_name resource")
-          strings.write_text(xml)
+          old_label = '<string name="app_name">Chiaki</string>'
+          new_label = '<string name="app_name">BeyondConsole</string>'
+          if old_label not in xml:
+              raise SystemExit("Could not find the upstream app label")
+          strings.write_text(xml.replace(old_label, new_label, 1))
 
           gradle = Path("app/build.gradle")
           source = gradle.read_text()
-          source, count = re.subn(
-              r'applicationId "com\\.metallic\\.chiaki"',
-              'applicationId "com.spideydev.beyondconsole"',
-              source,
-              count=1
-          )
-          if count != 1:
-              raise SystemExit("Could not find the upstream applicationId")
-          gradle.write_text(source)
+          old_id = 'applicationId "com.metallic.chiaki"'
+          new_id = 'applicationId "com.spideydev.beyondconsole"'
+          if old_id not in source:
+              raise SystemExit("Could not find the upstream application ID")
+          gradle.write_text(source.replace(old_id, new_id, 1))
           PY
 
       - name: Build BeyondConsole Android client
