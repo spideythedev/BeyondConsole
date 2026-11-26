@@ -40,6 +40,10 @@ The upstream repository includes AGPL-3.0-only with additional OpenSSL permissio
 
 ## Current decision
 
+The owner approved changing BeyondConsole to AGPL-3.0 with the additional OpenSSL permission. The root `LICENSE` and `NOTICE` now record that decision and the pinned upstream reference. The CI workflow applies the BeyondConsole app label and application ID to the upstream Android app and produces a separate artifact. It does not yet replace the upstream launcher artwork or merge the source tree into this repository.
+
+
+
 Do not copy selected Kotlin or JNI files into the BeyondConsole app yet. They depend on the upstream database, preferences, model classes, resource IDs, native library, CMake options, third-party submodules and application lifecycle.
 
 The unchanged upstream Android client has now compiled successfully in GitHub Actions. Run [45535017493](https://github.com/spideythedev/BeyondConsole/actions/runs/45535017493) completed successfully on 25 November 2026 and uploaded the `chiaki-ng-android-reference` APK artifact. The downloaded APK is 31,631,065 bytes and includes `libchiaki-jni.so` for `arm64-v8a`, `armeabi-v7a`, `x86` and `x86_64`. This confirms that the pinned source and CI build configuration produce an APK; it does not prove installation or a working stream on a physical device.
